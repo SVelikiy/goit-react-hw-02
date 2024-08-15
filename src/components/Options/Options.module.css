@@ -1,0 +1,10 @@
+.button {
+  text-transform: capitalize;
+  color: #fafafa;
+  background-color: darkgrey;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 10px;
+}

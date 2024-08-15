@@ -1,3 +1,5 @@
+import css from './Feedback.module.css'
+
 export default function Feedback({
   values: { good, neutral, bad },
   feedbackName: [textGood, textNeutral, textBad],
@@ -5,17 +7,19 @@ export default function Feedback({
 }) {
   return (
     <div>
-      <p>
+      <p className={css.text}>
         {textGood} : {good}
       </p>
-      <p>
+      <p className={css.text}>
         {textNeutral} : {neutral}
       </p>
-      <p>
+      <p className={css.text}>
         {textBad} : {bad}
       </p>
-      <p>Total : {totalFeedback}</p>
-      <p>Positive : {Math.round((good / totalFeedback) * 100)} %</p>
+      <p className={css.text}>Total : {totalFeedback}</p>
+      <p className={css.text}>
+        Positive : {Math.round((good / totalFeedback) * 100)} %
+      </p>
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function App() {
     if (localValue !== null) {
       return JSON.parse(localValue);
     }
-    return feedback;
+    return {feedback};
   });
 
   const updateFeedback = (key) => {
