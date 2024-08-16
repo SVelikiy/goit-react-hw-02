@@ -2,7 +2,7 @@ import css from './Feedback.module.css'
 
 export default function Feedback({
   values: { good, neutral, bad },
-  feedbackName: { goodText, neutralText, badText },
+  feedbackName : {goodText,neutralText,badText},
   totalFeedback,
   positiveFeedback,
 }) {

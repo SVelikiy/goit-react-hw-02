@@ -4,14 +4,7 @@ import Feedback from "../Feedback/Feedback";
 import { useState, useEffect } from "react";
 import Notification from "../Notification/Notification";
 
-export default function App() {
-  const feedback = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
-  const [goodText, neutralText, badText] = Object.keys(feedback);
-  
+export default function App() {  
 
   const [values, setValues] = useState(() => {
     const localValue = window.localStorage.getItem("savedValues");
@@ -24,6 +17,8 @@ export default function App() {
     bad: 0,
   };
   });
+
+  const keys = Object.keys(values)
 
   const updateFeedback = (key) => {
     setValues({
@@ -43,15 +38,15 @@ export default function App() {
     });
   };
 
+
   useEffect(() => {
-    window.localStorage.setItem("savedValues", JSON.stringify(values), [totalFeedback]);
-  });
+    window.localStorage.setItem("savedValues", JSON.stringify(values));} ,[totalFeedback]);
 
   return (
     <div>
       <Description />
       <Options
-        btnName={{ goodText, neutralText, badText }}
+        btnName={keys}
         updateFeed={updateFeedback}
         resetFeed={resetFeedback}
         totalFeedback={totalFeedback}
@@ -59,7 +54,11 @@ export default function App() {
       {totalFeedback > 0 ? (
         <Feedback
           values={values}
-          feedbackName={{ goodText, neutralText, badText }}
+          feedbackName={{
+            goodText: "good",
+            neutralText: "neutral",
+            badText: "bad",
+          }}
           totalFeedback={totalFeedback}
           positiveFeedback={PositiveFeedback}
         />
