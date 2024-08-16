@@ -1,7 +1,7 @@
 import css from "./Options.module.css";
 
 export default function Options({
-  btnName: [good, neutral, bad],
+  btnName : {goodText,neutralText,badText},
   updateFeed,
   totalFeedback,
   resetFeed,
@@ -10,24 +10,24 @@ export default function Options({
     <div className={css.btnContainer}>
       <button
         className={css.button}
-        onClick={() => updateFeed(good)}
+        onClick={() => updateFeed(goodText)}
         type="button"
       >
-        {good}
+        {goodText}
       </button>
       <button
         className={css.button}
-        onClick={() => updateFeed(neutral)}
+        onClick={() => updateFeed(neutralText)}
         type="button"
       >
-        {neutral}
+        {neutralText}
       </button>
       <button
         className={css.button}
-        onClick={() => updateFeed(bad)}
+        onClick={() => updateFeed(badText)}
         type="button"
       >
-        {bad}
+        {badText}
       </button>
       {totalFeedback > 0 && (
         <button className={css.button} onClick={resetFeed} type="button">

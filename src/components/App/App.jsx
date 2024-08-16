@@ -10,14 +10,19 @@ export default function App() {
     neutral: 0,
     bad: 0,
   };
-  const keys = Object.keys(feedback);
+  const [goodText, neutralText, badText] = Object.keys(feedback);
+  
 
   const [values, setValues] = useState(() => {
     const localValue = window.localStorage.getItem("savedValues");
     if (localValue !== null) {
       return JSON.parse(localValue);
     }
-    return {feedback};
+    return { 
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
   });
 
   const updateFeedback = (key) => {
@@ -28,22 +33,25 @@ export default function App() {
   };
 
   const totalFeedback = values.good + values.neutral + values.bad;
+  const PositiveFeedback = Math.round((values.good / totalFeedback) * 100);
 
   const resetFeedback = () => {
-    setValues(feedback);
+    setValues({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
   };
 
   useEffect(() => {
-    window.localStorage.setItem("savedValues", JSON.stringify(values), [
-      values,
-    ]);
+    window.localStorage.setItem("savedValues", JSON.stringify(values), [totalFeedback]);
   });
 
   return (
     <div>
       <Description />
       <Options
-        btnName={keys}
+        btnName={{ goodText, neutralText, badText }}
         updateFeed={updateFeedback}
         resetFeed={resetFeedback}
         totalFeedback={totalFeedback}
@@ -51,8 +59,9 @@ export default function App() {
       {totalFeedback > 0 ? (
         <Feedback
           values={values}
-          feedbackName={keys}
+          feedbackName={{ goodText, neutralText, badText }}
           totalFeedback={totalFeedback}
+          positiveFeedback={PositiveFeedback}
         />
       ) : (
         <Notification />
